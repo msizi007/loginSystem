@@ -26,22 +26,25 @@ export default class UserAuth {
       localStorage.setItem("user", JSON.stringify(dbUser));
       return true;
     }
+    validation.style.display = "block";
+    validation.textContent = "Invalid username or password";
     return false;
   }
 
   getProfile() {
     let user = JSON.parse(localStorage.getItem("user"));
 
-    console.log(username);
     profileIcon.textContent = user.username.charAt(0).toUpperCase();
     username.textContent = user.username;
 
-    btnLogout.addEventListeners("click", () => {
+    email.textContent = `Email: ${user.email}`;
+
+    btnLogout.addEventListener("click", () => {
       this.signout();
       window.location.href = "login.html";
     });
 
-    let res = JSON.parse(localStorage.getItem("user"));
+    // let res = JSON.parse(localStorage.getItem("user"));
     return false;
   }
 
@@ -50,6 +53,7 @@ export default class UserAuth {
 
     if (user.loggedIn) {
       user.loggedIn = false;
+      localStorage.setItem("user", JSON.stringify(user));
       alert("User has successfully been logged out...");
     }
     return;

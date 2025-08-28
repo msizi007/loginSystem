@@ -42,3 +42,7 @@ card {
   font-size: 2rem;
   font-weight: 500;
 }
+span {
+  display: block;
+  display: none;
+}
